@@ -1,59 +1,31 @@
-<p id="notice"><%= notice %></p>
+<h1>Listado de Empresas</h1>
 
-<h1>Companies</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody id = 'companies'>
-    <% @companies.each do |company| %>
-    <tr id="<%= company.id%>">
-        <td id="nombre<%= company.id %>"><%= company.name %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company), data:{remote:true} %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?', remote: true } %></td>
-    </tr>
-
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Company', new_company_path %>
+<%= render 'form', company: @company %> 
 
 
 
-<%= form_with(model: @company) do |form| %>
-    
-    
-    <% if @company.errors.any? %>
-    <div id="error_explanation">
-    <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-      <ul>
-          <% @company.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-      </ul>
-
-    </div>
+<ul id="companies">
+ <%= render @companies %> 
+</ul>
 
 
-<% end %>
 
 
-<div class="field">
-<%= form.label :name %>
-<%= form.text_field :name %>
+
+<%# Este es el modal: %>
+<div id="modal-edit" class="modal fade" tabindex="-1" role="dialog">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h2 class="modal-title">Reclamos</h2>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+
+     </div>
+   </div>
+ </div>
 </div>
-
-<div class="actions">
-<%= form.submit %>
-</div>
-<% end %>
